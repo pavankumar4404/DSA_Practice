@@ -28,10 +28,10 @@ int main() {
     Solution solution;
 
     // Example usage:
-    std::string inputWord = "axltaiwutdykakybdctmgzriejugumjumklfmryvtozdfjbvvo";
+    string inputWord = "axltaiwutdykakybdctmgzriejugumjumklfmryvtozdfjbvvo";
     int result = solution.minimumPushes(inputWord);
 
-    std::cout << "Minimum Pushes for the word '" << inputWord << "': " << result << std::endl;
+    cout << "Minimum Pushes for the word '" << inputWord << "': " << result << endl;
 
     return 0;
 }
