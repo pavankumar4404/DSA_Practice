@@ -18,35 +18,34 @@ typedef map<int,int> mii;
 void solve(){
     int n;
     cin>>n;
-    vector<pair<int,ll>> arr;
-    int a;
-    ll x;
-    rep(i,n){
+    unordered_map<ll,int> no;
+    ll maxi=INT_MAX;
+    ll mini=0;
+    for(int i=0;i<n;i++){
+        ll a,x;
         cin>>a>>x;
-        arr.push_back({a,x});
-    }
-    sort(arr.begin(),arr.end());
-    int i=1;
-    while(arr[i].first != 2){
-        i++;
-    }
-    ll max=arr[i].second;
-    ll min=arr[i-1].second;
-    if(min>max){
-        cout<<0<<endl;
-    }
-    else{
-        while(arr[i].first!=3){
-            i++;
+        if(a==3){
+            no[x]++;
         }
-        int in=0;
-        for(;i<n;i++){
-            if(arr[i].second<=max && arr[i].second>=min){
-                in++;
-            }
+        if(a==1){
+            mini=max(mini,x);
         }
-        cout<<(max-min+1-in)<<endl;
+        if(a==2){
+            maxi=min(maxi,x);
+        }
     }
+    // cout<<mini<<' '<<maxi<<endl;
+    if(mini>maxi){
+        cout<<0<<'\n';
+        return;
+    }
+    ll ans=0;
+    for(auto it:no){
+        if(it.first>=mini && it.first<=maxi){
+            ans++;
+        }
+    }
+    cout<<maxi-mini+1-ans<<'\n';
 }
 
 int32_t main()
