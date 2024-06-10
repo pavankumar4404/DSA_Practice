@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class DisjointSet{
+class DS{
+public:
     vector<int> size;
     vector<int> parent;
-
-public:
-    DisjointSet(int n){
+    DS(int n){
         size.resize(n+1, 1);
         parent.resize(n+1);
 
@@ -15,16 +14,16 @@ public:
         }
     }
 
-    int findUPar(int node){
+    int findPar(int node){
         if(node == parent[node]){
             return node;
         }
-        return parent[node] = findUPar(parent[node]);
+        return parent[node] = findPar(parent[node]);
     }
 
-    void unionBySize(int u, int v){
-        int up_u = findUPar(u);
-        int up_v = findUPar(v);
+    void Union(int u, int v){
+        int up_u = findPar(u);
+        int up_v = findPar(v);
         if(up_u == up_v) return;
 
         if(size[up_u] < size[up_v]){
@@ -37,6 +36,7 @@ public:
         }
     }
 };
+
 
 // class DisjointSet{
 //     vector<int> rank;
@@ -52,16 +52,16 @@ public:
 //         }
 //     }
 
-//     int findUPar(int node){
+//     int findPar(int node){
 //         if(node == parent[node]){
 //             return node;
 //         }
-//         return parent[node] = findUPar(parent[node]);
+//         return parent[node] = findPar(parent[node]);
 //     }
 
 //     void unionByRank(int u, int v){
-//         int up_u = findUPar(u);
-//         int up_v = findUPar(v);
+//         int up_u = findPar(u);
+//         int up_v = findPar(v);
 //         if(up_u == up_v) return;
 
 //         if(rank[up_u] < rank[up_v]){
@@ -78,21 +78,21 @@ public:
 // };
 
 int main() {
-    DisjointSet ds(7);
-    ds.unionBySize(1, 2);
-    ds.unionBySize(2, 3);
-    ds.unionBySize(4, 5);
-    ds.unionBySize(6, 7);
-    ds.unionBySize(5, 6);
+    DS ds(7);
+    ds.Union(1, 2);
+    ds.Union(2, 3);
+    ds.Union(4, 5);
+    ds.Union(6, 7);
+    ds.Union(5, 6);
     // if 3 and 7 same or not
-    if (ds.findUPar(3) == ds.findUPar(7)) {
+    if (ds.findPar(3) == ds.findPar(7)) {
         cout << "Same\n";
     }
     else cout << "Not same\n";
 
-    ds.unionBySize(3, 7);
+    ds.Union(3, 7);
 
-    if (ds.findUPar(3) == ds.findUPar(7)) {
+    if (ds.findPar(3) == ds.findPar(7)) {
         cout << "Same\n";
     }
     else cout << "Not same\n";
